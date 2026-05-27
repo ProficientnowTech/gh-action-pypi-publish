@@ -9,12 +9,13 @@ REF = os.environ['REF']
 REPO = os.environ['REPO']
 REPO_ID = os.environ['REPO_ID']
 REPO_ID_GH_ACTION = '178055147'
+REPO_ID_PROFICIENTNOW_FORK = '797299073'
 
 ACTION_SHELL_CHECKOUT_PATH = pathlib.Path(__file__).parent.resolve()
 
 
 def set_image(ref: str, repo: str, repo_id: str) -> str:
-    if repo_id == REPO_ID_GH_ACTION:
+    if repo_id in {REPO_ID_GH_ACTION, REPO_ID_PROFICIENTNOW_FORK}:
         return str(ACTION_SHELL_CHECKOUT_PATH / 'Dockerfile')
     docker_ref = ref.replace('/', '-')
     return f'docker://ghcr.io/{repo}:{docker_ref}'
